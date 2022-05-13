@@ -74,11 +74,11 @@ func loadBalancer(port string) {
 		reverseProxy := httputil.NewSingleHostReverseProxy(originServerURL)
 
 		reverseProxy.ServeHTTP(rw, req)
-		logCh <- logEntry{time.Now(), logInfo, "Requst Loaded to : " + originServerURL.Host + ":" + originServerURL.Port()}
+        logCh <- logEntry{time.Now(), logInfo, "Requests Loaded to : http://" + originServerURL.Host}
 
 	})
-	log.Fatal(http.ListenAndServe(port, loadBalancerHandler))
 	logCh <- logEntry{time.Now(), logInfo, "Server up : http://localhost" + port}
+	log.Fatal(http.ListenAndServe(port, loadBalancerHandler))
 
 }
 
