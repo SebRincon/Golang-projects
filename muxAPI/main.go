@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -66,11 +67,16 @@ func main() {
 		close(logCh)
 	}()
 
+	// This is a way to pass in a port number to the program. Via Flags
+	portFlag := flag.Int("port", 8081, "listening port")
+	flag.Parse()
+	port := fmt.Sprintf(":%d", *portFlag)
+
 	// Send data to logger
 	logCh <- logEntry{time.Now(), logInfo, "App is Starting"}
 
 	// Start server
-	logCh <- logEntry{time.Now(), logInfo, "Server up : http://localhost:8080"}
+	logCh <- logEntry{time.Now(), logInfo, "Server up : http://localhost" + port}
 
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", homeLink)
@@ -79,7 +85,7 @@ func main() {
 	router.HandleFunc("/events/{id}", getOneEvent).Methods("GET")
 	router.HandleFunc("/events/{id}", updateEvent).Methods("PATCH")
 	router.HandleFunc("/events/{id}", deleteEvent).Methods("DELETE")
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(port, router))
 
 	// End of life
 	logCh <- logEntry{time.Now(), logInfo, "App is Shutting Down"}
