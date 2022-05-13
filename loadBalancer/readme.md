@@ -1,5 +1,5 @@
 # Load Balancer Explained
->A load balancer is a kind of [reverse proxy](), which allows us to dynamically route HTTP requests to specific endpoints. This package only containts the loadbalancer so refer to [muxAPI]() or [Simple API in Go]() to create several API instaces if needed for testing.
+>A load balancer is a kind of [reverse proxy](), which allows us to dynamically route HTTP requests to specific endpoints. This package only containts the loadbalancer so refer to [muxAPI](https://github.com/SebRincon/Golang-projects/tree/master/muxAPI) or [Simple API in Go](https://github.com/SebRincon/Golang-projects/edit/master/loadBalancer/readme.md?plain=1#L48-L80) to create several API instaces if needed for testing.
                                                   
                                                                                             
                                                                                             
