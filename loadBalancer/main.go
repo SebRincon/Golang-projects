@@ -34,7 +34,7 @@ var doneCh = make(chan struct{})    // signal only channel
 func main() {
 
 	// This is a way to pass in a port number to the program. Via Flags
-	portFlag := flag.Int("port", 8081, "listening port")
+	portFlag := flag.Int("port", 8080, "listening port")
 	flag.Parse()
 	port := fmt.Sprintf(":%d", *portFlag)
 
@@ -74,7 +74,7 @@ func loadBalancer(port string) {
 		reverseProxy := httputil.NewSingleHostReverseProxy(originServerURL)
 
 		reverseProxy.ServeHTTP(rw, req)
-        logCh <- logEntry{time.Now(), logInfo, "Requests Loaded to : http://" + originServerURL.Host}
+		logCh <- logEntry{time.Now(), logInfo, "Requests Loaded to : http://" + originServerURL.Host}
 
 	})
 	logCh <- logEntry{time.Now(), logInfo, "Server up : http://localhost" + port}
