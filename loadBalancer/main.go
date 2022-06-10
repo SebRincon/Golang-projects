@@ -77,7 +77,7 @@ func loadBalancer(port string) {
 		logCh <- logEntry{time.Now(), logInfo, "Requests Loaded to : http://" + originServerURL.Host}
 
 	})
-	logCh <- logEntry{time.Now(), logInfo, "Server up : http://localhost" + port}
+	logCh <- logEntry{time.Now(), logInfo, "Server up : http://localhost:" + port}
 	log.Fatal(http.ListenAndServe(port, loadBalancerHandler))
 
 }
