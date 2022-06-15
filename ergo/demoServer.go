@@ -26,6 +26,8 @@ var (
 	EnableRPC bool
 )
 
+
+// Methods running off the demo Server struct 
 func (dgs *demo) Init(process *gen.ServerProcess, args ...etf.Term) error {
 	fmt.Printf("[%s] Init: args %v \n", process.Name(), args)
 	return nil
